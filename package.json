@@ -1,0 +1,30 @@
+{
+  "name": "aplikasi-kebugaran-web",
+  "version": "1.0.0",
+  "description": "Aplikasi Kebugaran Berbasis Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwans123/aplikasi-kebugaran-web.git"
+  },
+  "keywords": [
+    "Fitness",
+    "Tracker"
+  ],
+  "author": "Bima Setyawan, Viskal Bayu Aji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iwans123/aplikasi-kebugaran-web/issues"
+  },
+  "homepage": "https://github.com/iwans123/aplikasi-kebugaran-web#readme",
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^20.2.1"
+  }
+}
