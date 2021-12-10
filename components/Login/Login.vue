@@ -8,7 +8,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           data-name="Layer 1"
-          width="720"
+          width="490"
           height="480"
           viewBox="0 0 869.99994 520.13854"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -18,20 +18,20 @@
         <i class="fab fa-twitter text-white m-3" style="font-size: 30px;" />
       </div>
       <div class="col-5">
-        <form class="container my-3 text-white">
+        <form class="container my-3 text-white" method="post" @submit.prevent="login">
           <div class="text-white text-center">
             <h1>Sign-In</h1>
           </div>
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input id="exampleInputEmail1" type="email" class="form-control" placeholder="Email" aria-describedby="emailHelp">
+            <label for="email" class="form-label">Email address</label>
+            <input id="email" v-model="email" type="email" class="form-control" placeholder="Email">
             <div id="emailHelp" class="form-text">
               We'll never share your email with anyone else.
             </div>
           </div>
           <div class="mb-3 text-white">
-            <label for="inputPassword5" class="form-label">Password</label>
-            <input id="inputPassword5" type="password" placeholder="Password" class="form-control" aria-describedby="passwordHelpBlock">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" v-model="password" type="password" placeholder="Password" class="form-control">
             <div id="passwordHelpBlock" class="form-text ">
               Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
             </div>
@@ -46,3 +46,33 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+
+  data () {
+    return {
+      email: '',
+      password: '',
+      error: null
+    }
+  },
+
+  methods: {
+    async login () {
+      try {
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        })
+
+        this.$router.push('/')
+      } catch (e) {
+        this.error = e.response.data.message
+      }
+    }
+  }
+}
+</script>

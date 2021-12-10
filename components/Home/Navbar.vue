@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-four-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">ActionKalistenik</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -14,12 +14,36 @@
         <span class="navbar-toggler-icon" />
       </button>
       <div id="navbarNavAltMarkup" class="collapse navbar-collapse">
-        <div class="navbar-nav">
+        <nav class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
           <a class="nav-link" href="#">About</a>
-          <a class="nav-link" href="#">Commnuity</a>
-        </div>
+          <a class="nav-link" href="#">Community</a>
+          <span v-if="isAuthenticated">
+            <a href="" class="nav-link" @click="logout">Logout</a>
+          </span>
+          <span v-else>
+            <NuxtLink to="/login">
+              <a href="" class="nav-link">Login</a>
+            </NuxtLink>
+          </span>
+        </nav>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+
+  methods: {
+    logout () {
+      this.$auth.logout()
+    }
+  }
+}
+</script>

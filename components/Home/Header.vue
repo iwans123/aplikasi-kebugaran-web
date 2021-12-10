@@ -5,12 +5,15 @@
         <div class="col-5 text-dark mt-5 ">
           <h1>Cari Komunitas Olahraga disekitar anda</h1>
           <div class="input-group mt-5">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control" placeholder="Community Search" aria-label="Recipient's username" aria-describedby="button-addon2">
             <button id="button-addon2" class="btn btn-outline-primary" type="button">
               Search
             </button>
           </div>
-          <div class="mt-3">
+          <div v-if="isAuthenticated" class="mt-3">
+            <p>Hello, {{ loggedInUser.name }}!</p>
+          </div>
+          <div v-else class="mt-3">
             <NuxtLink to="/Register">
               <a href="" class="btn btn-success">Join Us</a>
             </NuxtLink>
@@ -23,3 +26,13 @@
     </div>
   </header>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  }
+}
+</script>
