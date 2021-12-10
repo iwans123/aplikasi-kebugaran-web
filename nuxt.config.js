@@ -43,7 +43,8 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -65,5 +66,38 @@ export default {
 
   serverMiddleware: [
     '~/api/index.js'
-  ]
+  ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/user/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: false,
+          user: {
+            url: '/api/user/view',
+            method: 'get',
+            propertyName: 'user'
+          },
+          register: {
+            url: '/api/user/register',
+            method: 'post',
+            propertyName: 'newUser'
+          }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
+      }
+    },
+    redirect: {
+      login: '/Login',
+      logout: '/',
+      home: '/'
+    },
+    rewriteRedirects: true
+  }
 }
