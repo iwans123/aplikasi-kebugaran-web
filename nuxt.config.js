@@ -13,12 +13,20 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'vendor/jquery/jquery.min.js' },
+      { src: 'vendor/bootstrap/js/bootstrap.bundle.min.js' },
+      { src: 'vendor/jquery-easing/jquery.easing.min.js' },
+      { src: 'js/sb-admin-2.min.js' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/style.css'
+    '~/assets/style/style.css',
+    '~/assets/vendor/fontawesome-free/css/all.min.css',
+    '~/assets/css/sb-admin-2.min.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -43,7 +51,8 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -61,5 +70,42 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  serverMiddleware: [
+    '~/api/index.js'
+  ],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/user/login',
+            method: 'post',
+            propertyName: 'token'
+          },
+          logout: false,
+          user: {
+            url: '/api/user/view',
+            method: 'get',
+            propertyName: 'user'
+          },
+          register: {
+            url: '/api/user/register',
+            method: 'post',
+            propertyName: 'newUser'
+          }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
+      }
+    },
+    redirect: {
+      login: '/Login',
+      logout: '/',
+      home: '/'
+    },
+    rewriteRedirects: true
   }
 }
