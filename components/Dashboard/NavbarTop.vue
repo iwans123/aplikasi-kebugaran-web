@@ -66,7 +66,7 @@
       <div class="topbar-divider d-none d-sm-block" />
 
       <!-- Nav Item - User Information -->
-      <li class="nav-item dropdown no-arrow">
+      <!-- <li class="nav-item dropdown no-arrow border">
         <a
           id="userDropdown"
           class="nav-link dropdown-toggle"
@@ -77,35 +77,30 @@
           aria-expanded="false"
         >
           <span v-if="isAuthenticated" class="mr-2 d-none d-lg-inline text-gray-600 small">Hello, {{ loggedInUser.name }}!</span>
-          <img
-            class="img-profile rounded-circle"
-            src="img/undraw_profile.svg"
-          >
-        </a>
-        <!-- Dropdown - User Information -->
-        <div
+          <i class="fas fa-user-circle" />
+        </a> -->
+      <!-- Dropdown - User Information -->
+      <!-- <div
           class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
           aria-labelledby="userDropdown"
         >
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
-            Profile
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-            Settings
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-            Activity Log
-          </a>
-          <div class="dropdown-divider" />
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" @click="logout">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
             Logout
           </a>
         </div>
-      </li>
+      </li> -->
+      <div v-if="isAuthenticated">
+        <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
+          <template #button-content>
+            <span>Hello, {{ loggedInUser.name }}!</span>
+          </template>
+          <b-dropdown-item @click="logout">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+            Logout
+          </b-dropdown-item>
+        </b-dropdown>
+      </div>
     </ul>
   </nav>
 </template>

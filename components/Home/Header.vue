@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-one-custom" style="background-image: url('images/Home/running7.jpg'); background-repeat: no-repeat; background-size: cover; height:80vh;">
+  <header style="background-image: url('images/Home/running7.jpg'); background-repeat: no-repeat; background-size: cover; height:80vh;">
     <div class="container">
       <div class="row">
         <div class="col-md-6 text-dark mt-5">
