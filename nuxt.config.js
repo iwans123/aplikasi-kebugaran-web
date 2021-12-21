@@ -13,12 +13,23 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: 'vendor/jquery/jquery.min.js' },
+      { src: 'vendor/bootstrap/js/bootstrap.bundle.min.js' },
+      { src: 'vendor/jquery-easing/jquery.easing.min.js' },
+      { src: 'js/sb-admin-2.min.js' },
+      { src: 'vendor/datatables/jquery.dataTables.min.js' },
+      { src: 'vendor/datatables/dataTables.bootstrap4.min.js' },
+      { src: 'js/demo/datatables-demo.js' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/style.css'
+    '~/assets/style/style.css',
+    '~/assets/vendor/fontawesome-free/css/all.min.css',
+    '~/assets/css/sb-admin-2.min.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -67,6 +78,10 @@ export default {
   serverMiddleware: [
     '~/api/index.js'
   ],
+
+  router: {
+    middleware: ['auth']
+  },
 
   auth: {
     strategies: {

@@ -2,7 +2,8 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-four-custom">
     <div class="container">
       <a class="navbar-brand" href="#">ActionKalistenik</a>
-      <button
+      <b-navbar-toggle target="nav-collapse" />
+      <!-- <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -12,12 +13,17 @@
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon" />
-      </button>
-      <div id="navbarNavAltMarkup" class="collapse navbar-collapse">
+      </button> -->
+      <b-collapse id="nav-collapse" class="collapse navbar-collapse" is-nav>
         <nav class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
           <a class="nav-link" href="#">About</a>
           <a class="nav-link" href="#">Community</a>
+          <span v-if="isAuthenticated">
+            <NuxtLink to="/Dashboard">
+              <a href="" class="nav-link">Dashboard</a>
+            </NuxtLink>
+          </span>
           <span v-if="isAuthenticated">
             <a href="" class="nav-link" @click="logout">Logout</a>
           </span>
@@ -27,7 +33,7 @@
             </NuxtLink>
           </span>
         </nav>
-      </div>
+      </b-collapse>
     </div>
   </nav>
 </template>
