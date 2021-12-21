@@ -26,6 +26,7 @@ export default {
     'app-community': Community,
     'app-about': About,
     'app-footer': Footer
-  }
+  },
+  auth: 'guest'
 }
 </script>

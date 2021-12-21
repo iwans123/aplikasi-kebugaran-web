@@ -6,11 +6,7 @@
           <h2>Welcome</h2>
         </div>
         <img src="images/Login/welcomeLogin.svg" width="100%" class="mt-5" alt="">
-        <div class="mt-5">
-          <i class="fab fa-facebook-square text-white m-3" style="font-size: 30px;" />
-          <i class="fab fa-instagram text-white m-3" style="font-size: 30px;" />
-          <i class="fab fa-twitter text-white m-3" style="font-size: 30px;" />
-        </div>
+        <div class="mt-5" />
       </div>
       <div class="col-md-7" style="background-color: #E6DDC4;">
         <form class="container my-3 text-dark" method="post" @submit.prevent="login">
@@ -24,18 +20,22 @@
               We'll never share your email with anyone else.
             </div>
           </div>
-          <div id="passwordHelpBlock" class="form-text " />
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" v-model="password" type="password" placeholder="Password" class="form-control">
+            <div id="passwordHelpBlock" class="form-text ">
+              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary ">
+              Login
+            </button>
+          </div>
         </form>
       </div>
-      <div>
-        <button type="submit" class="btn btn-primary ">
-          Login
-        </button>
-      </div>
-      <!-- </form> -->
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
