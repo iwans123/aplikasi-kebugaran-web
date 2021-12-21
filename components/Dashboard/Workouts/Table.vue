@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <table class="table">
+      <caption>Day - Training Name</caption>
       <thead>
         <tr>
           <th scope="col">

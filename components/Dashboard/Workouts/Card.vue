@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h2>List of Community</h2>
+        <h2>Workouts</h2>
       </div>
       <div class="col-12">
         <app-modalday />
       </div>
       <div class="col mt-3">
-        <b-card header="Primary" style="background-color: #181D31;">
+        <b-card header="Primary">
           <b-card-text>
             <app-table />
             <hr color="white">
