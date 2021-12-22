@@ -31,7 +31,9 @@
             <h6 class="card-subtitle mb-2 text-muted">
               {{ community.city }}
             </h6>
-            <p class="card-text"> {{ community.description }} </p>
+            <p class="card-text">
+              {{ community.description }}
+            </p>
             <nuxt-link class="card-link" :to="'/community/view/' + community._id">
               View Community
             </nuxt-link>
