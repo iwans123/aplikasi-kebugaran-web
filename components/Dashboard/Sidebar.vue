@@ -91,12 +91,12 @@
       <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-fw fa-tachometer-alt" />Workouts
       </NuxtLink>
-      <NuxtLink class="nav-link" to="/user/workout">
+      <!-- <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-clipboard-list" />Workouts Schedules
       </NuxtLink>
       <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-calendar-alt" />Calender
-      </NuxtLink>
+      </NuxtLink> -->
     </li>
 
     <hr class="sidebar-divider">
@@ -106,14 +106,14 @@
     </div>
 
     <!--  -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <NuxtLink class="nav-link" to="/user/workout">
         <i class="far fa-clipboard" />Your Templates
       </NuxtLink>
       <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-clipboard" />Public Templates
       </NuxtLink>
-    </li>
+    </li> -->
 
     <hr class="sidebar-divider">
     <!-- Heading -->
