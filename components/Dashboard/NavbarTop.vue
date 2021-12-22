@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
       <i class="fa fa-bars" />
-    </button>
+    </button> -->
 
     <!-- Topbar Search -->
     <!-- <form
@@ -90,7 +90,7 @@
           </a>
         </div>
       </li> -->
-      <div v-if="isAuthenticated">
+      <!-- <div v-if="isAuthenticated">
         <b-dropdown size="lg" variant="link" toggle-class="text-decoration-none" no-caret>
           <template #button-content>
             <span>Hello, {{ loggedInUser.name }}!</span>
@@ -99,7 +99,11 @@
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
             Logout
           </b-dropdown-item>
-        </b-dropdown>
+        </b-dropdown> -->
+      <div v-if="isAuthenticated">
+        <div>
+          <span>Hello, {{ loggedInUser.name }}!</span>
+        </div>
       </div>
     </ul>
   </nav>

@@ -8,13 +8,26 @@
         <app-modalday />
       </div>
       <div class="col mt-3">
-        <b-card header="Primary">
+        <!-- <b-card header="Primary" bg-variant="secondary">
           <b-card-text>
             <app-table />
             <hr color="white">
             <app-modalexercises />
           </b-card-text>
-        </b-card>
+        </b-card> -->
+        <div class="card border-primary">
+          <div class="card-header d-flex justify-content-between">
+            Featured
+            <a href="" class="btn btn-danger">Delete</a>
+          </div>
+          <div class="card-body">
+            <div class="card-text">
+              <app-table />
+            </div>
+            <hr color="white">
+            <app-modalexercises />
+          </div>
+        </div>
       </div>
     </div>
   </div>
