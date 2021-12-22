@@ -23,28 +23,38 @@
       @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group
-          label="Exercises"
+        <!-- <b-form-group
+          label="Category"
           label-for="exercises-input"
           invalid-feedback="Exercises is required"
-          :state="exerciseState"
         >
           <b-form-select
             id="inline-form-custom-select-pref"
+            v-model="selectedProject"
             class="mb-2 mr-sm-2 mb-sm-0"
             :options="[{ text: 'Choose...', value: null }]"
-            :value="null"
+            @change="exerciseShorting"
           >
-            <option v-for="(category) in categories.results" :key="category.id">
+            <option v-for="(category) in categories.results" :key="category.id" :value="category.id">
               {{ category.name }}
             </option>
           </b-form-select>
-        </b-form-group>
+        </b-form-group> -->
+        <b-dropdown
+          :text="select"
+          block
+          variant="primary"
+          class="m-2"
+          menu-class="w-100"
+        >
+          <b-dropdown-item v-for="(category) in categories.results" :key="category.id" @click="exerciseShorting(category.id),selectChange(category.name)">
+            {{ category.name }}
+          </b-dropdown-item>
+        </b-dropdown>
         <b-form-group
-          label="Comment"
+          label="Exercises"
           label-for="comment-input"
           invalid-feedback="Name is required"
-          :state="commentState"
         >
           <b-form-select
             id="inline-form-custom-select-pref"
@@ -52,7 +62,7 @@
             :options="[{ text: 'Choose...', value: null }]"
             :value="null"
           >
-            <option v-for="(exercise, index) in exercises.results" :key="index">
+            <option v-for="(exercise, index) in shortExercise" :key="index">
               {{ exercise.name }}
             </option>
           </b-form-select>
@@ -67,11 +77,10 @@
 export default {
   data () {
     return {
-      name: '',
-      nameState: null,
-      submittedNames: [],
+      select: 'choose',
       categories: [],
-      exercises: []
+      exercises: [],
+      shortExercise: []
     }
   },
   async fetch () {
@@ -81,11 +90,17 @@ export default {
     this.exercises = await fetch(
       'https://wger.de/api/v2/exerciseinfo/?format=json'
     ).then(res => res.json())
+    // this.shortExercise = await fetch(
+    //   'https://wger.de/api/v2/exerciseinfo/?format=json'
+    // ).then(res => res.json())
   },
   methods: {
+    selectChange (input) {
+      this.select = input
+    },
     exerciseShorting (input) {
-      this.exercises = this.categories.filter(function (el) {
-        return el.categories.results.id === input
+      this.shortExercise = this.exercises.results.filter(function (el) {
+        return el.category.id === input
       })
     },
     handleOk (bvModalEvt) {
