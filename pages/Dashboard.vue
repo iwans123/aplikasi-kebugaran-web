@@ -9,6 +9,7 @@ import Community from '@/components/Dashboard/Community/Community.vue'
 export default {
   components: {
     'app-community': Community
-  }
+  },
+  middleware: 'auth'
 }
 </script>

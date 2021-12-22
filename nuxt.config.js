@@ -79,6 +79,10 @@ export default {
     '~/api/index.js'
   ],
 
+  router: {
+    middleware: ['auth']
+  },
+
   auth: {
     strategies: {
       local: {

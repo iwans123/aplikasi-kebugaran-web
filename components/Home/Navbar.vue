@@ -20,6 +20,11 @@
           <a class="nav-link" href="#">About</a>
           <a class="nav-link" href="#">Community</a>
           <span v-if="isAuthenticated">
+            <NuxtLink to="/Dashboard">
+              <a href="" class="nav-link">Dashboard</a>
+            </NuxtLink>
+          </span>
+          <span v-if="isAuthenticated">
             <a href="" class="nav-link" @click="logout">Logout</a>
           </span>
           <span v-else>
