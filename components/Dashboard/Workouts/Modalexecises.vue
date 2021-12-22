@@ -20,8 +20,6 @@
       id="modal-exercise"
       ref="modal"
       title="Add Exercises"
-      @show="resetModal"
-      @hidden="resetModal"
       @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -31,12 +29,16 @@
           invalid-feedback="Exercises is required"
           :state="exerciseState"
         >
-          <b-form-input
-            id="exercises-input"
-            v-model="name"
-            :state="exerciseState"
-            required
-          />
+          <b-form-select
+            id="inline-form-custom-select-pref"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            :options="[{ text: 'Choose...', value: null }]"
+            :value="null"
+          >
+            <option v-for="(category) in categories.results" :key="category.id">
+              {{ category.name }}
+            </option>
+          </b-form-select>
         </b-form-group>
         <b-form-group
           label="Comment"
@@ -44,11 +46,16 @@
           invalid-feedback="Name is required"
           :state="commentState"
         >
-          <b-form-input
-            id="comment-input"
-            v-model="name"
-            :state="commentState"
-          />
+          <b-form-select
+            id="inline-form-custom-select-pref"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            :options="[{ text: 'Choose...', value: null }]"
+            :value="null"
+          >
+            <option v-for="(exercise, index) in exercises.results" :key="index">
+              {{ exercise.name }}
+            </option>
+          </b-form-select>
         </b-form-group>
         <!-- checkbox -->
         <hr>
@@ -62,18 +69,24 @@ export default {
     return {
       name: '',
       nameState: null,
-      submittedNames: []
+      submittedNames: [],
+      categories: [],
+      exercises: []
     }
   },
+  async fetch () {
+    this.categories = await fetch(
+      'https://wger.de/api/v2/exercisecategory/?format=json'
+    ).then(res => res.json())
+    this.exercises = await fetch(
+      'https://wger.de/api/v2/exerciseinfo/?format=json'
+    ).then(res => res.json())
+  },
   methods: {
-    checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-      this.nameState = valid
-      return valid
-    },
-    resetModal () {
-      this.name = ''
-      this.nameState = null
+    exerciseShorting (input) {
+      this.exercises = this.categories.filter(function (el) {
+        return el.categories.results.id === input
+      })
     },
     handleOk (bvModalEvt) {
       // Prevent modal from closing

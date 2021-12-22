@@ -18,10 +18,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
+              <tr v-for="(mountain, index) in mountains.results" :key="index">
+                <td>{{ mountain.name }}</td>
+                <td>{{ mountain.category.id }}</td>
+                <td>#</td>
                 <td><app-detail /></td>
               </tr>
             </tbody>
@@ -45,7 +45,7 @@ export default {
   },
   async fetch () {
     this.mountains = await fetch(
-      'https://wger.de/api/v2/exercisecategory/?format=json'
+      'https://wger.de/api/v2/exerciseinfo/?format=json'
     ).then(res => res.json())
   }
 }
