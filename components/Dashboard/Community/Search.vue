@@ -7,11 +7,13 @@
       <div class="col-md-6">
         <div class="input-group mb-5">
           <input
+            v-model.trim="search"
             type="text"
             class="form-control border-0 small"
-            placeholder="Search for..."
+            placeholder="Search Community by City"
             aria-label="Search"
             aria-describedby="basic-addon2"
+            @keyup="getCommunityByCity"
           >
           <div class="input-group-append">
             <button class="btn btn-primary" type="button">
@@ -23,7 +25,7 @@
     </div>
     <div id="community-group" class="row">
       <div class="col">
-        <div v-for="community in communities" :key="community._id" class="card" style="width: 18rem;">
+        <div v-for="community in communityByCity" :key="community._id" class="card" style="width: 18rem;">
           <div class="card-body">
             <h4 class="card-title">
               {{ community.name }}
@@ -48,9 +50,34 @@
 export default {
   props: {
     communities: {
-      type: Object,
+      type: [Object, Array],
       default: () => {}
     }
+  },
+
+  data () {
+    return {
+      communityByCity: [],
+      search: ''
+    }
+  },
+
+  created () {
+    this.getCommunityByCity()
+  },
+
+  methods: {
+    getCommunityByCity () {
+      if (this.search) {
+        this.communityByCity = this.communities.filter((community) => {
+          return community.city.toLowerCase().includes(this.search.toLowerCase())
+        })
+      } else {
+        this.communityByCity = this.communities
+        return this.communityByCity
+      }
+    }
   }
+
 }
 </script>
