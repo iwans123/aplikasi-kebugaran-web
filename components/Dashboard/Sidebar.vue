@@ -79,17 +79,17 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <!-- <div class="sidebar-heading">
       Interface
-    </div>
+    </div> -->
 
     <!--  -->
     <li class="nav-item">
       <NuxtLink class="nav-link" to="/user/workout">
-        <i class="fas fa-fw fa-tachometer-alt" />Workouts
+        <i class="fas fa-dumbbell" />Workouts
       </NuxtLink>
       <!-- <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-clipboard-list" />Workouts Schedules
@@ -99,11 +99,11 @@
       </NuxtLink> -->
     </li>
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <!-- <div class="sidebar-heading">
       Workouts Templates
-    </div>
+    </div> -->
 
     <!--  -->
     <!-- <li class="nav-item">
@@ -115,14 +115,14 @@
       </NuxtLink>
     </li> -->
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <!-- <div class="sidebar-heading">
       Exercises
-    </div>
+    </div> -->
 
     <!--  -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <NuxtLink class="nav-link" to="/user/Category">
         <i class="fas fa-filter" />by Category
       </NuxtLink>
@@ -132,18 +132,23 @@
       <NuxtLink class="nav-link" to="/user/Equipment">
         <i class="fas fa-dumbbell" />by equipment
       </NuxtLink>
-    </li>
+    </li> -->
 
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
     <!--  -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <NuxtLink class="nav-link" to="/user/workout">
         <i class="fas fa-folder-plus" />Add New exercise
       </NuxtLink>
-    </li>
-
+    </li> -->
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+    <li class="nav-item">
+      <a class="nav-link btn-danger" href="" @click="logout">
+        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+        Logout
+      </a>
+    </li>
 
     <!-- Sidebar Toggler (Sidebar) -->
     <!-- <div class="text-center d-none d-md-inline">
@@ -151,3 +156,17 @@
     </div> -->
   </ul>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
+    }
+  }
+}
+</script>

@@ -40,18 +40,23 @@
             </option>
           </b-form-select>
         </b-form-group> -->
-        <b-dropdown
-          :text="select"
-          block
-          variant="primary"
-          class="m-2"
-          menu-class="w-100"
-        >
-          <b-dropdown-item v-for="(category) in categories.results" :key="category.id" @click="exerciseShorting(category.id),selectChange(category.name)">
-            {{ category.name }}
-          </b-dropdown-item>
-        </b-dropdown>
+        <!-- Categories -->
         <b-form-group
+          label="Categories"
+        >
+          <b-dropdown
+            :text="selectCategories"
+            block
+            variant="outline-primary"
+            class="m-2"
+            menu-class="w-100"
+          >
+            <b-dropdown-item v-for="(category) in categories.results" :key="category.id" @click="exerciseShorting(category.id),selectedCategories(category.name)">
+              {{ category.name }}
+            </b-dropdown-item>
+          </b-dropdown>
+        </b-form-group>
+        <!-- <b-form-group
           label="Exercises"
           label-for="comment-input"
           invalid-feedback="Name is required"
@@ -66,9 +71,31 @@
               {{ exercise.name }}
             </option>
           </b-form-select>
+        </b-form-group> -->
+        <!-- Exercise -->
+        <b-form-group
+          label="Exercises"
+        >
+          <b-dropdown
+            :text="selectExercise"
+            block
+            variant="outline-primary"
+            class="m-2"
+            menu-class="w-100"
+          >
+            <b-dropdown-item v-for="(exercise, index) in shortExercise" :key="index" @click="selectedExercise(exercise.name, exercise.description)">
+              {{ exercise.name }}
+            </b-dropdown-item>
+          </b-dropdown>
         </b-form-group>
-        <!-- checkbox -->
+        <!-- Description -->
         <hr>
+        <div>
+          <h2>
+            Description :
+          </h2>
+          {{ exerciseDescription }}
+        </div>
       </form>
     </b-modal>
   </div>
@@ -77,7 +104,9 @@
 export default {
   data () {
     return {
-      select: 'choose',
+      exerciseDescription: '--',
+      selectExercise: 'choose',
+      selectCategories: 'choose',
       categories: [],
       exercises: [],
       shortExercise: []
@@ -95,8 +124,12 @@ export default {
     // ).then(res => res.json())
   },
   methods: {
-    selectChange (input) {
-      this.select = input
+    selectedCategories (input) {
+      this.selectCategories = input
+    },
+    selectedExercise (name, description) {
+      this.selectExercise = name
+      this.exerciseDescription = description
     },
     exerciseShorting (input) {
       this.shortExercise = this.exercises.results.filter(function (el) {
