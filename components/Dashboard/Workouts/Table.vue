@@ -7,7 +7,7 @@
           {{ workoutDay }}
         </p>
       </h6>
-      <button class="btn btn-sm btn-outline-danger">
+      <button class="btn btn-sm btn-outline-danger" @click="removeWorkout()">
         Remove Workout
       </button>
     </div>
@@ -30,7 +30,7 @@
               <td>{{ exercise.exsets }}</td>
               <td>{{ exercise.comment }}</td>
               <td>
-                <button class="btn btn-sm btn-danger">
+                <button class="btn btn-sm btn-danger" @click="deleteExercise(exercise.exid)">
                   Remove Exercise
                 </button>
               </td>
@@ -51,6 +51,10 @@
 <script>
 export default {
   props: {
+    workoutId: {
+      type: String,
+      default: ''
+    },
     workoutName: {
       type: String,
       default: 'Exercise Name'
@@ -67,7 +71,25 @@ export default {
 
   data () {
     return {
-      ex: this.workoutEx
+      ex: this.workoutEx,
+      id: this.workoutId
+    }
+  },
+
+  methods: {
+    async deleteExercise (exerciseName) {
+      try {
+        await this.$axios.put(`/api/workout-data/delete/${this.id}/${exerciseName}`)
+      } catch (error) {
+        console.log('error removing exercise')
+      }
+    },
+    async removeWorkout () {
+      try {
+        await this.$axios.delete(`/api/workout-data/delete/${this.id}`)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

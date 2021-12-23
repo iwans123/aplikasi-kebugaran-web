@@ -14,7 +14,7 @@
             label="Exercise Name"
           />
           <b-form-input
-            v-model.trim="search"
+            v-model.trim="exname"
             list="my-list-id"
             @keyup="getExercise"
           />
@@ -28,28 +28,19 @@
         </div>
         <hr>
         <!-- Categories -->
-        <b-form-group
-          label="Categories"
-        >
-          <b-dropdown
-            :text="selectCategories"
-            block
-            variant="outline-primary"
-            class="m-2"
-            menu-class="w-100"
-          >
-            <b-dropdown-item v-for="(category) in categories.results" :key="category.id" @click="exerciseShorting(category.id),selectedCategories(category.name)">
-              {{ category.name }}
-            </b-dropdown-item>
-          </b-dropdown>
-        </b-form-group>
         <hr>
+        <div>
+          <b-form-group
+            label="Sets"
+          />
+          <b-form-input v-model="exsets" />
+        </div>
         <!-- Description -->
         <div>
           <b-form-group
             label="Comment"
           />
-          <b-form-input />
+          <b-form-input v-model="comment" />
         </div>
       </form>
     </b-modal>
@@ -60,7 +51,11 @@ export default {
   props: {
     workoutName: {
       type: String,
-      default: 'Workout Name'
+      default: ''
+    },
+    workoutId: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -69,7 +64,8 @@ export default {
       selectExercise: 'choose',
       selectCategories: 'choose',
       categories: [],
-      search: '',
+      exname: null,
+      wrId: this.workoutId,
       exercisesInfo: [],
       exercises: [],
       shortExercise: []
@@ -89,7 +85,7 @@ export default {
         .then(response => response.json())
         .then((res) => {
           if (this.searchExercise) {
-            this.exercises = res.results.filter(ex => ex.name.toLowerCase().includes(this.search.toLowerCase()))
+            this.exercises = res.results.filter(ex => ex.name.toLowerCase().includes(this.exname.toLowerCase()))
           } else {
             this.exercises = res.results
           }
@@ -113,12 +109,19 @@ export default {
       // Trigger submit handler
       this.handleSubmit()
     },
-    handleSubmit () {
-      this.submittedNames.push(this.name)
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-exercise')
-      })
+    async handleSubmit () {
+      try {
+        await this.$axios.put(`/api/workout-data/update/${this.wrId}`, {
+          exname: this.exname,
+          exsets: this.exsets,
+          comment: this.comment
+        })
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-exercise')
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }

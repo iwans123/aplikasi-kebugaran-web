@@ -15,17 +15,20 @@
             </b-button>
           </div>
           <div class="card-body">
-            <div class="card-text">
+            <div
+              v-for="workout in workouts"
+              :key="workout._id"
+              class="card-text"
+            >
               <app-table
-                v-for="workout in workouts"
-                :key="workout._id"
+                :workout-id="workout._id"
                 :workout-name="workout.name"
                 :workout-day="workout.days"
                 :workout-ex="workout.exercises"
               />
+              <app-modalexercises :workout-name="workout.name" :workout-id="workout._id" />
             </div>
             <hr color="white">
-            <app-modalexercises />
           </div>
         </div>
       </div>
