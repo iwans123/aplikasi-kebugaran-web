@@ -20,8 +20,6 @@
       id="modal-day"
       ref="modal"
       title="Add Workout day"
-      @show="resetModal"
-      @hidden="resetModal"
       @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -29,21 +27,15 @@
           label="Description"
           label-for="name-input"
           invalid-feedback="Name is required"
-          :state="nameState"
         >
           <b-form-input
             id="name-input"
-            v-model="name"
-            :state="nameState"
             required
           />
           <!-- checkbox -->
           <hr>
           <b-form-checkbox-group
             id="checkbox-group-2"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="flavour-2"
             stacked
           >
             <b-form-checkbox value="Sunday">
@@ -74,21 +66,9 @@
 export default {
   data () {
     return {
-      name: '',
-      nameState: null,
-      submittedNames: []
     }
   },
   methods: {
-    checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-      this.nameState = valid
-      return valid
-    },
-    resetModal () {
-      this.name = ''
-      this.nameState = null
-    },
     handleOk (bvModalEvt) {
       // Prevent modal from closing
       bvModalEvt.preventDefault()

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-four-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">ActionKalistenik</a>
+      <a class="navbar-brand" href="#"><i class="fas fa-dumbbell" /></a>
       <b-navbar-toggle target="nav-collapse" />
       <!-- <button
         class="navbar-toggler"

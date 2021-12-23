@@ -20,38 +20,82 @@
       id="modal-exercise"
       ref="modal"
       title="Add Exercises"
-      @show="resetModal"
-      @hidden="resetModal"
       @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group
-          label="Exercises"
+        <!-- <b-form-group
+          label="Category"
           label-for="exercises-input"
           invalid-feedback="Exercises is required"
-          :state="exerciseState"
         >
-          <b-form-input
-            id="exercises-input"
-            v-model="name"
-            :state="exerciseState"
-            required
-          />
-        </b-form-group>
+          <b-form-select
+            id="inline-form-custom-select-pref"
+            v-model="selectedProject"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            :options="[{ text: 'Choose...', value: null }]"
+            @change="exerciseShorting"
+          >
+            <option v-for="(category) in categories.results" :key="category.id" :value="category.id">
+              {{ category.name }}
+            </option>
+          </b-form-select>
+        </b-form-group> -->
+        <!-- Categories -->
         <b-form-group
-          label="Comment"
+          label="Categories"
+        >
+          <b-dropdown
+            :text="selectCategories"
+            block
+            variant="outline-primary"
+            class="m-2"
+            menu-class="w-100"
+          >
+            <b-dropdown-item v-for="(category) in categories.results" :key="category.id" @click="exerciseShorting(category.id),selectedCategories(category.name)">
+              {{ category.name }}
+            </b-dropdown-item>
+          </b-dropdown>
+        </b-form-group>
+        <!-- <b-form-group
+          label="Exercises"
           label-for="comment-input"
           invalid-feedback="Name is required"
-          :state="commentState"
         >
-          <b-form-input
-            id="comment-input"
-            v-model="name"
-            :state="commentState"
-          />
+          <b-form-select
+            id="inline-form-custom-select-pref"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            :options="[{ text: 'Choose...', value: null }]"
+            :value="null"
+          >
+            <option v-for="(exercise, index) in shortExercise" :key="index">
+              {{ exercise.name }}
+            </option>
+          </b-form-select>
+        </b-form-group> -->
+        <!-- Exercise -->
+        <b-form-group
+          label="Exercises"
+        >
+          <b-dropdown
+            :text="selectExercise"
+            block
+            variant="outline-primary"
+            class="m-2"
+            menu-class="w-100"
+          >
+            <b-dropdown-item v-for="(exercise, index) in shortExercise" :key="index" @click="selectedExercise(exercise.name, exercise.description)">
+              {{ exercise.name }}
+            </b-dropdown-item>
+          </b-dropdown>
         </b-form-group>
-        <!-- checkbox -->
+        <!-- Description -->
         <hr>
+        <div>
+          <h2>
+            Description :
+          </h2>
+          {{ exerciseDescription }}
+        </div>
       </form>
     </b-modal>
   </div>
@@ -60,20 +104,37 @@
 export default {
   data () {
     return {
-      name: '',
-      nameState: null,
-      submittedNames: []
+      exerciseDescription: '--',
+      selectExercise: 'choose',
+      selectCategories: 'choose',
+      categories: [],
+      exercises: [],
+      shortExercise: []
     }
   },
+  async fetch () {
+    this.categories = await fetch(
+      'https://wger.de/api/v2/exercisecategory/?format=json'
+    ).then(res => res.json())
+    this.exercises = await fetch(
+      'https://wger.de/api/v2/exerciseinfo/?format=json'
+    ).then(res => res.json())
+    // this.shortExercise = await fetch(
+    //   'https://wger.de/api/v2/exerciseinfo/?format=json'
+    // ).then(res => res.json())
+  },
   methods: {
-    checkFormValidity () {
-      const valid = this.$refs.form.checkValidity()
-      this.nameState = valid
-      return valid
+    selectedCategories (input) {
+      this.selectCategories = input
     },
-    resetModal () {
-      this.name = ''
-      this.nameState = null
+    selectedExercise (name, description) {
+      this.selectExercise = name
+      this.exerciseDescription = description
+    },
+    exerciseShorting (input) {
+      this.shortExercise = this.exercises.results.filter(function (el) {
+        return el.category.id === input
+      })
     },
     handleOk (bvModalEvt) {
       // Prevent modal from closing
