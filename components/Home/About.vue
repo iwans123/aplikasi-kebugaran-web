@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="about-us" class="container my-5">
     <div class="row">
       <div class="col-12 text-center mb-5">
         <h2>About Us</h2>
@@ -18,8 +18,8 @@
         data-aos-easing="ease-out-cubic"
         data-aos-duration="2000"
       >
-        <h2>hallo</h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam quaerat dolores architecto quisquam, autem adipisci temporibus voluptatibus commodi itaque voluptate esse asperiores natus ut laboriosam repellendus. Facere sapiente doloremque consequatur.</p>
+        <h2>hallo,</h2>
+        <p>Kami hadir disini untuk memudahkan teman - teman sekalian mendapatkan info tentang komunitas olahraga kalistenik disekitar kalian. Tujuan dari hadirnya kami disini untuk memajukan olahraga kalistenik Indonesia dengan membantu komunitas kalistenik diberbagai daerah menyampaikan informasi komunitasnya.</p>
       </div>
     </div>
   </div>
