@@ -37,9 +37,12 @@
             <p class="card-text">
               {{ community.description }}
             </p>
-            <nuxt-link class="card-link" :to="'/user/Community/' + community._id">
-              View Community
-            </nuxt-link>
+            <p class="card-text">
+              {{ community.schedule }}
+            </p>
+            <a :href="'https://www.instagram.com/'+ community.instagram" target="_blank" class="card-link">
+              {{ community.instagram }}
+            </a>
           </div>
         </div>
       </div>
