@@ -6,9 +6,8 @@
       title="Add Workout day"
       @ok="handleOk"
     >
-      <form ref="form" @submit.stop.prevent="handleSubmit">
+      <form ref="form" @submit.prevent="handleSubmit()">
         <b-form-group
-          v-model="name"
           label="Name"
           label-for="name-input"
           invalid-feedback="Name is required"
@@ -20,7 +19,17 @@
           />
           <!-- checkbox -->
           <hr>
-          <b-form-checkbox-group
+          <b-form-group
+            label="Days"
+            label-for="day-input"
+            invalid-feedback="Days is required"
+          >
+            <b-form-input
+              id="day-input"
+              v-model="days"
+              required
+            />
+          <!-- <b-form-checkbox-group
             id="checkbox-group-2"
             stacked
           >
@@ -42,7 +51,8 @@
             <b-form-checkbox v-model="days" value="Saturday">
               Saturday
             </b-form-checkbox>
-          </b-form-checkbox-group>
+          </b-form-checkbox-group> -->
+          </b-form-group>
         </b-form-group>
       </form>
     </b-modal>
@@ -53,8 +63,8 @@ export default {
   data () {
     return {
       name: null,
-      days: [],
-      exercises: [],
+      days: null,
+      exercises: null,
       error: null
     }
   },
@@ -67,10 +77,9 @@ export default {
     },
     async handleSubmit () {
       try {
-        await this.$axios.post('/api/workout/add', {
+        await this.$axios.post('/api/workout-data/create', {
           name: this.name,
-          days: this.days,
-          exercises: this.exercises
+          days: this.days
         })
         // Hide the modal manually
         this.$nextTick(() => {

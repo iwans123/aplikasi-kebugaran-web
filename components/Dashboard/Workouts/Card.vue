@@ -16,7 +16,13 @@
           </div>
           <div class="card-body">
             <div class="card-text">
-              <app-table />
+              <app-table
+                v-for="workout in workouts"
+                :key="workout._id"
+                :workout-name="workout.name"
+                :workout-day="workout.days"
+                :workout-ex="workout.exercises"
+              />
             </div>
             <hr color="white">
             <app-modalexercises />
@@ -36,6 +42,17 @@ export default {
     'app-modalday': Modalday,
     'app-table': Table,
     'app-modalexercises': Modalexercises
+  },
+  props: {
+    workouts: {
+      type: [Object, Array],
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      workoutData: this.workouts
+    }
   }
 }
 </script>

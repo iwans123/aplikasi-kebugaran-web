@@ -1,8 +1,5 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-exercise variant="success">
-      Add exercises
-    </b-button>
     <b-modal
       id="modal-exercise"
       ref="modal"
@@ -12,6 +9,7 @@
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <!-- Exercise -->
         <div>
+          {{ workoutName }}
           <b-form-group
             label="Exercise Name"
           />
@@ -59,6 +57,12 @@
 </template>
 <script>
 export default {
+  props: {
+    workoutName: {
+      type: String,
+      default: 'Workout Name'
+    }
+  },
   data () {
     return {
       exerciseDescription: '--',
