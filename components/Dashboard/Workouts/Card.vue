@@ -8,17 +8,11 @@
         <app-modalday />
       </div>
       <div class="col mt-3">
-        <!-- <b-card header="Primary" bg-variant="secondary">
-          <b-card-text>
-            <app-table />
-            <hr color="white">
-            <app-modalexercises />
-          </b-card-text>
-        </b-card> -->
         <div class="card border-primary">
           <div class="card-header d-flex justify-content-between">
-            Featured
-            <a href="" class="btn btn-danger">Delete</a>
+            <b-button v-b-modal.modal-day variant="success">
+              Add training day
+            </b-button>
           </div>
           <div class="card-body">
             <div class="card-text">

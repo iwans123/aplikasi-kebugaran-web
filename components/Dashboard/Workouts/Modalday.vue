@@ -1,21 +1,5 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-day variant="success">
-      Add training day
-    </b-button>
-
-    <!-- <div class="mt-3">
-      Submitted Names:
-      <div v-if="submittedNames.length === 0">
-        --
-      </div>
-      <ul v-else class="mb-0 pl-3">
-        <li v-for="name in submittedNames" :key="name">
-          {{ name }}
-        </li>
-      </ul>
-    </div> -->
-
     <b-modal
       id="modal-day"
       ref="modal"
@@ -24,12 +8,14 @@
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group
-          label="Description"
+          v-model="name"
+          label="Name"
           label-for="name-input"
           invalid-feedback="Name is required"
         >
           <b-form-input
             id="name-input"
+            v-model="name"
             required
           />
           <!-- checkbox -->
@@ -38,22 +24,22 @@
             id="checkbox-group-2"
             stacked
           >
-            <b-form-checkbox value="Sunday">
+            <b-form-checkbox v-model="days" value="Sunday">
               Sunday
             </b-form-checkbox>
-            <b-form-checkbox value="Monday">
+            <b-form-checkbox v-model="days" value="Monday">
               Monday
             </b-form-checkbox>
-            <b-form-checkbox value="Tuesday">
+            <b-form-checkbox v-model="days" value="Tuesday">
               Tuesday
             </b-form-checkbox>
-            <b-form-checkbox value="Wednesday">
+            <b-form-checkbox v-model="days" value="Wednesday">
               Wednesday
             </b-form-checkbox>
-            <b-form-checkbox value="Thursday">
+            <b-form-checkbox v-model="days" value="Thursday">
               Thursday
             </b-form-checkbox>
-            <b-form-checkbox value="Saturday">
+            <b-form-checkbox v-model="days" value="Saturday">
               Saturday
             </b-form-checkbox>
           </b-form-checkbox-group>
@@ -66,6 +52,10 @@
 export default {
   data () {
     return {
+      name: null,
+      days: [],
+      exercises: [],
+      error: null
     }
   },
   methods: {
@@ -75,17 +65,20 @@ export default {
       // Trigger submit handler
       this.handleSubmit()
     },
-    handleSubmit () {
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return
+    async handleSubmit () {
+      try {
+        await this.$axios.post('/api/workout/add', {
+          name: this.name,
+          days: this.days,
+          exercises: this.exercises
+        })
+        // Hide the modal manually
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-day')
+        })
+      } catch (error) {
+        this.error = error.response.data.message
       }
-      // Push the name to submitted names
-      this.submittedNames.push(this.name)
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-day')
-      })
     }
   }
 }

@@ -13,6 +13,7 @@
             placeholder="Search Community by City"
             aria-label="Search"
             aria-describedby="basic-addon2"
+            autocomplete="off"
             @keyup="getCommunityByCity"
           >
           <div class="input-group-append">
@@ -23,9 +24,9 @@
         </div>
       </div>
     </div>
-    <div id="community-group" class="row">
+    <div v-for="community in communityByCity" id="community-group" :key="community._id" class="row">
       <div class="col">
-        <div v-for="community in communityByCity" :key="community._id" class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h4 class="card-title">
               {{ community.name }}
@@ -36,7 +37,7 @@
             <p class="card-text">
               {{ community.description }}
             </p>
-            <nuxt-link class="card-link" :to="'/community/view/' + community._id">
+            <nuxt-link class="card-link" :to="'/user/Community/' + community._id">
               View Community
             </nuxt-link>
           </div>
