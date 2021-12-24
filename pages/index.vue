@@ -4,9 +4,9 @@
 
     <app-header />
 
-    <app-community />
-
     <app-about />
+
+    <app-community />
 
     <app-footer />
   </div>

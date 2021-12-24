@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-5">
-    <div class="row d-flex flex-wrap">
+  <div id="community" class="container my-5">
+    <!-- <div class="row d-flex flex-wrap">
       <div class="col-md-12 text-center mb-md-5">
         <h2>Community</h2>
       </div>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div data-aos="zoom-out-up" class="col-md-6">
-        <img src="images/Home/running2.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
+        <img src="images/Home/picture1.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
         <div class="card-body">
           <h5 class="card-title">
             Card title
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div data-aos="zoom-out-up" class="col-md-6">
-        <img src="images/Home/running3.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
+        <img src="images/Home/picture2.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
         <div class="card-body">
           <h5 class="card-title">
             Card title
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div data-aos="zoom-out-up" class="col-md-6">
-        <img src="images/Home/running4.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
+        <img src="images/Home/picture3.jpg" class="card-img-top" style="height: 300px; width: 500px; border-radius: 25px;" alt="...">
         <div class="card-body">
           <h5 class="card-title">
             Card title
@@ -48,16 +48,61 @@
           </p>
         </div>
       </div>
+    </div> -->
+    <div>
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="3000"
+        controls
+        indicators
+        background="#ababab"
+        img-width="1024"
+        img-height="480"
+        style="text-shadow: 1px 1px 2px #333;"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
+      >
+        <!-- 1 -->
+        <b-carousel-slide img-src="images/Home/picture4.jpg" />
+
+        <!--2 -->
+        <b-carousel-slide img-src="images/Home/picture2.jpg" />
+
+        <!-- 3 -->
+        <b-carousel-slide img-src="images/Home/picture3.jpg" />
+
+        <p class="mt-4">
+          Slide #: {{ slide }}<br>
+          Sliding: {{ sliding }}
+        </p>
+      </b-carousel>
     </div>
   </div>
 </template>
 <script>
-import AOS from 'aos'
-require('aos/dist/aos.css')
+// import AOS from 'aos'
+// require('aos/dist/aos.css')
 
+// export default {
+//   mounted () {
+//     AOS.init()
+//   }
+// }
 export default {
-  mounted () {
-    AOS.init()
+  data () {
+    return {
+      slide: 0,
+      sliding: null
+    }
+  },
+  methods: {
+    onSlideStart (slide) {
+      this.sliding = true
+    },
+    onSlideEnd (slide) {
+      this.sliding = false
+    }
   }
 }
 </script>

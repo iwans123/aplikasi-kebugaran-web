@@ -2,14 +2,15 @@
   <header style="background-image: url('images/Home/running7.jpg'); background-repeat: no-repeat; background-size: cover; height:80vh;">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 text-dark mt-5">
+        <div class="col-md-7 text-dark mt-5">
           <h1>
-            Cari Komunitas Olahraga disekitar anda <NuxtLink to="/Community">
-              disini
-            </NuxtLink>
+            Cari Komunitas Olahraga Kalistenik disekitar anda
+            <!-- <NuxtLink to="/Community">
+              di sini
+            </NuxtLink> -->
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione neque fugit iure dolores delectus nam eum ut suscipit impedit minus obcaecati, voluptate tenetur, pariatur iusto, deserunt rerum explicabo quis id!
+            Olahraga kalistenik merupakan seperangkat gerakan motorik untuk membangun otot tubuh yang bisa Anda lakukan hanya dengan menggunakan berat tubuh dan gaya gravitasi. Daftar sekarang untuk pengalaman lebih...
           </p>
           <!-- <div class="input-group mt-5">
             <input type="text" class="form-control" placeholder="Community Search" aria-label="Recipient's username" aria-describedby="button-addon2">
