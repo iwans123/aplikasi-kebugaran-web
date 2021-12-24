@@ -10,6 +10,9 @@
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js"
   },
+  {
+    "author": "Viskal Bayu Aji | Bima Setyawan"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@now/node": "^1.8.5",
