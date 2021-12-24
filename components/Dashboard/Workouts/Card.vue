@@ -8,24 +8,27 @@
         <app-modalday />
       </div>
       <div class="col mt-3">
-        <!-- <b-card header="Primary" bg-variant="secondary">
-          <b-card-text>
-            <app-table />
-            <hr color="white">
-            <app-modalexercises />
-          </b-card-text>
-        </b-card> -->
         <div class="card border-primary">
           <div class="card-header d-flex justify-content-between">
-            Featured
-            <a href="" class="btn btn-danger">Delete</a>
+            <b-button v-b-modal.modal-day variant="success">
+              Add training day
+            </b-button>
           </div>
           <div class="card-body">
-            <div class="card-text">
-              <app-table />
+            <div
+              v-for="workout in workouts"
+              :key="workout._id"
+              class="card-text"
+            >
+              <app-table
+                :workout-id="workout._id"
+                :workout-name="workout.name"
+                :workout-day="workout.days"
+                :workout-ex="workout.exercises"
+              />
+              <app-modalexercises :workout-name="workout.name" :workout-id="workout._id" />
             </div>
             <hr color="white">
-            <app-modalexercises />
           </div>
         </div>
       </div>
@@ -42,6 +45,17 @@ export default {
     'app-modalday': Modalday,
     'app-table': Table,
     'app-modalexercises': Modalexercises
+  },
+  props: {
+    workouts: {
+      type: [Object, Array],
+      default: () => {}
+    }
+  },
+  data () {
+    return {
+      workoutData: this.workouts
+    }
   }
 }
 </script>

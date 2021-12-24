@@ -59,7 +59,7 @@ export default {
           }
         })
 
-        this.$router.push('/Dashboard')
+        this.$router.push('/user/Community')
       } catch (e) {
         this.error = e.response.data.message
       }
