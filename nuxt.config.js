@@ -1,3 +1,4 @@
+const isServerlessEnvironment = process.env.ON_VERCEL === 'true'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -75,9 +76,11 @@ export default {
   build: {
   },
 
-  serverMiddleware: [
-    '~/api/index.js'
-  ],
+  serverMiddleware: isServerlessEnvironment
+    ? []
+    : [
+        '~/api/index.js'
+      ],
 
   router: {
     middleware: ['auth']
