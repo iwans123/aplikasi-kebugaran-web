@@ -2,6 +2,7 @@
   "name": "kebugaran-web",
   "version": "1.0.0",
   "private": true,
+  "author": "Viskal Bayu Aji | Bima Setyawan",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -9,9 +10,6 @@
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint": "npm run lint:js"
-  },
-  {
-    "author": "Viskal Bayu Aji | Bima Setyawan"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
